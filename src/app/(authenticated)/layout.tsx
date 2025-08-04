@@ -1,11 +1,20 @@
 import type { Metadata } from "next";
-import { Sidebar } from "@/components/ui/sidebar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
+import { AppSidebar } from "@/components/authenticated/app-sidebar";
+
 
 const AuthenticatedLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
-        <Sidebar/>
-        {children}
+        <SidebarProvider>
+          <AppSidebar />
+          <main>
+            <SidebarTrigger />
+            {children}
+          </main>
+        </SidebarProvider>
     </>
   );
 };
+
+export default AuthenticatedLayout;
