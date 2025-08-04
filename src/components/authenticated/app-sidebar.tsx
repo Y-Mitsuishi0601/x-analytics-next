@@ -1,4 +1,16 @@
-import { Folder, User, ChartBarDecreasing, Settings, ChevronDown, ChevronUp } from "lucide-react"
+"use client"
+import { 
+  User,
+  GalleryVerticalEnd,
+  AudioWaveform,
+  Command,
+  ChartBarDecreasing,
+  Settings,
+  ChevronDown,
+  ChevronUp,
+  Plus
+} from "lucide-react"
+import { useEffect, useState } from "react";
 
 import {
   Sidebar,
@@ -6,11 +18,15 @@ import {
   SidebarFooter,
   SidebarContent,
   SidebarGroup,
+  SidebarGroupAction,
   SidebarGroupContent,
   SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubItem,
+  SidebarMenuSubButton,
 } from "@/components/ui/sidebar"
 
 import {
@@ -19,16 +35,22 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { TeamSwitcher } from "./team-switcher"
 
 
+// MenuItem型を定義
+type MenuItem = {
+  title: string
+  url: string
+  icon: React.ComponentType
+  subItems?: {
+    title: string
+    url: string
+  }[]
+}
 
-// Menu items.
-const items = [
-  {
-    title: "Projects",
-    url: "/projects",
-    icon: Folder,
-  },
+// 統合されたメニュー定義
+const menuItems: MenuItem[] = [
   {
     title: "Dashboard",
     url: "/dashboard",
@@ -38,86 +60,118 @@ const items = [
     title: "Member",
     url: "/members",
     icon: User,
+    subItems: [
+      {
+        title: "Invite a Member",
+        url: "/members/invite",
+      },
+    ],
   },
   {
     title: "Settings",
-    url: "settings",
+    url: "/settings",
     icon: Settings,
   },
 ]
 
+const teams = [
+  {
+    name: "Acme Inc",
+    logo: GalleryVerticalEnd,
+    plan: "Enterprise",
+  },
+  {
+    name: "Acme Corp.",
+    logo: AudioWaveform,
+    plan: "Startup",
+  },
+  {
+    name: "Evil Corp.",
+    logo: Command,
+    plan: "Free",
+  },
+]
+
 export function AppSidebar() {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   return (
     <Sidebar>
       <SidebarHeader>
+        <TeamSwitcher teams={teams} />
+      </SidebarHeader>
+      <SidebarContent>
+        <SidebarGroup>
+          <SidebarGroupLabel>Projects</SidebarGroupLabel>
+          <SidebarGroupAction>
+            <Plus />
+            <span className="sr-only">Add Project</span>
+          </SidebarGroupAction>
+          <SidebarGroupContent></SidebarGroupContent>
+        </SidebarGroup>
+        <SidebarGroup>
+          <SidebarGroupLabel>Menu</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {menuItems.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild>
+                    <a href={item.url}>
+                      <item.icon />
+                      <span>{item.title}</span>
+                    </a>
+                  </SidebarMenuButton>
+                  {item.subItems && isClient && (
+                    <SidebarMenuSub>
+                      {item.subItems.map((subItem) => (
+                        <SidebarMenuSubItem key={subItem.title}>
+                          <SidebarMenuSubButton asChild>
+                            <a href={subItem.url}>
+                              <span>{subItem.title}</span>
+                            </a>
+                          </SidebarMenuSubButton>
+                        </SidebarMenuSubItem>
+                      ))}
+                    </SidebarMenuSub>
+                  )}
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+      </SidebarContent>
+      <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <SidebarMenuButton>
-                  Acme Inc
-                  <ChevronDown className="ml-auto" />
+                  <User /> Username
+                  <ChevronUp className="ml-auto" />
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-[--radix-popper-anchor-width]">
+              <DropdownMenuContent
+                side="top"
+                className="w-[--radix-popper-anchor-width]"
+              >
                 <DropdownMenuItem>
-                  <span>Acme Inc</span>
+                  <span>Account</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <span>Acme Corp.</span>
+                  <span>Billing</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <span>Sign out</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </SidebarMenuItem>
         </SidebarMenu>
-      </SidebarHeader>
-      <SidebarContent>
-          <SidebarGroup>
-            <SidebarGroupLabel>Menu</SidebarGroupLabel>
-            <SidebarGroupContent>
-              <SidebarMenu>
-                {items.map((item) => (
-                  <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild>
-                      <a href={item.url}>
-                        <item.icon />
-                        <span>{item.title}</span>
-                      </a>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ))}
-              </SidebarMenu>
-            </SidebarGroupContent>
-          </SidebarGroup>
-      </SidebarContent>
-      <SidebarFooter>
-          <SidebarMenu>
-            <SidebarMenuItem>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <SidebarMenuButton>
-                    <User /> Username
-                    <ChevronUp className="ml-auto" />
-                  </SidebarMenuButton>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent
-                  side="top"
-                  className="w-[--radix-popper-anchor-width]"
-                >
-                  <DropdownMenuItem>
-                    <span>Account</span>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <span>Billing</span>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <span>Sign out</span>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </SidebarMenuItem>
-          </SidebarMenu>
       </SidebarFooter>
     </Sidebar>
-  )
+  );
 }
