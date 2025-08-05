@@ -1,0 +1,17 @@
+.container {
+    padding: 1.5rem;
+}
+
+.card {
+    border: 2px solid var(--primary);
+    background-color: var(--primary-light);
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.card-content {
+    font-size: 1rem;
+}

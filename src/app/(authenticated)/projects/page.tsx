@@ -6,21 +6,21 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs"
-import { Overview } from "./_components/overview"
+import { Insights } from "./_components/insights"
 import { AccountsAndPosts } from "./_components/accounts-and-posts"
 import { Storage } from "./_components/storage"
 import styles from "./page.module.css"
 
 export default function ProjectPage() {
     return (
-      <Tabs defaultValue="overview" className={styles.container}>
+      <Tabs defaultValue="insights" className={styles.container}>
         <TabsList>
-          <TabsTrigger value="overview">Overview</TabsTrigger>
+          <TabsTrigger value="insights">Insights</TabsTrigger>
           <TabsTrigger value="posts-and-accounts">Posts And Accounts</TabsTrigger>
           <TabsTrigger value="storage">Storage</TabsTrigger>
         </TabsList>
-        <TabsContent value="overview">
-          <Overview />
+        <TabsContent value="insights">
+          <Insights />
         </TabsContent>
         <TabsContent value="posts-and-accounts">
           <AccountsAndPosts />
