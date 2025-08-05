@@ -6,9 +6,9 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs"
-import { Insights } from "./_components/insights"
+import { Insights } from "./_components/insights/insights"
 import { AccountsAndPosts } from "./_components/accounts-and-posts"
-import { Storage } from "./_components/storage"
+import { Storage } from "./_components/storage/storage"
 import styles from "./page.module.css"
 
 export default function ProjectPage() {

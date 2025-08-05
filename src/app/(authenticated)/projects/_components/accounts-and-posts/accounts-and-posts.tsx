@@ -1,22 +1,19 @@
 "use client"
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import styles from "./accounts-and-posts.module.css"
-import { mockAccounts, mockPosts } from "@/mock/mockData"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import styles from "./accounts-and-posts.module.css";
+import { mockAccounts, mockPosts } from "@/mock/mockData";
+import { AvatarDisplay } from "./avatar-display";
 
 function AccountCard({ account }: { account: typeof mockAccounts[0] }) {
     return (
         <Card className="mb-4">
             <CardHeader>
                 <div className="flex items-center space-x-4">
-                    <Avatar className="h-12 w-12">
-                        <AvatarImage src={account.avatar} alt={account.displayName} />
-                        <AvatarFallback>{account.displayName.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-                    </Avatar>
+                    <AvatarDisplay src={account.avatar} alt={account.displayName} fallback={account.username} />
                     <div className="flex-1">
                         <CardTitle className="text-lg">{account.displayName}</CardTitle>
                         <CardDescription>{account.username}</CardDescription>
@@ -44,7 +41,7 @@ function AccountCard({ account }: { account: typeof mockAccounts[0] }) {
                 </div>
             </CardContent>
         </Card>
-    )
+    );
 }
 
 function PostCard({ post }: { post: typeof mockPosts[0] }) {
@@ -52,9 +49,7 @@ function PostCard({ post }: { post: typeof mockPosts[0] }) {
         <Card className="mb-4">
             <CardContent className="pt-6">
                 <div className="flex items-start space-x-3">
-                    <Avatar className="h-10 w-10">
-                        <AvatarFallback>{post.displayName.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-                    </Avatar>
+                    <AvatarDisplay src="/placeholder-avatar.jpg" alt={post.displayName} fallback={post.username} />
                     <div className="flex-1 space-y-2">
                         <div className="flex items-center space-x-2">
                             <span className="font-medium text-sm">{post.displayName}</span>
@@ -81,7 +76,7 @@ function PostCard({ post }: { post: typeof mockPosts[0] }) {
                 </div>
             </CardContent>
         </Card>
-    )
+    );
 }
 
 export function AccountsAndPosts() {

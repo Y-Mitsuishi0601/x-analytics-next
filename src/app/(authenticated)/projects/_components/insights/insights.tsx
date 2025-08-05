@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { nextAction, projectSummary, topKeywords, topAccounts, topHashtags } from "@/mock/mockData";
+import { SummaryItem } from "./summary-item";
 import styles from "./insights.module.css";
 
 export function Insights() {
@@ -34,22 +35,10 @@ export function Insights() {
                     </CardHeader>
                     <CardContent className="space-y-4">
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                            <div className="text-center">
-                                <div className="text-2xl font-bold text-primary">{projectSummary.totalAccounts}</div>
-                                <div className="text-sm text-muted-foreground">Accounts</div>
-                            </div>
-                            <div className="text-center">
-                                <div className="text-2xl font-bold text-primary">{projectSummary.totalPosts.toLocaleString()}</div>
-                                <div className="text-sm text-muted-foreground">Posts</div>
-                            </div>
-                            <div className="text-center">
-                                <div className="text-2xl font-bold text-primary">{projectSummary.totalImages}</div>
-                                <div className="text-sm text-muted-foreground">Images</div>
-                            </div>
-                            <div className="text-center">
-                                <div className="text-2xl font-bold text-primary">{projectSummary.totalVoices}</div>
-                                <div className="text-sm text-muted-foreground">Voices</div>
-                            </div>
+                            <SummaryItem label="Accounts" value={projectSummary.totalAccounts} />
+                            <SummaryItem label="Posts" value={projectSummary.totalPosts.toLocaleString()} />
+                            <SummaryItem label="Images" value={projectSummary.totalImages} />
+                            <SummaryItem label="Voices" value={projectSummary.totalVoices} />
                         </div>
                         <Separator />
                         <div className="text-sm text-muted-foreground">
