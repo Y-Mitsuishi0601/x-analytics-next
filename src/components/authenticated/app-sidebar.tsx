@@ -35,8 +35,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { TeamSwitcher } from "./team-switcher"
 
+import { 
+  TeamSwitcher
+} from "./team-switcher"
 
 // MenuItem型を定義
 type MenuItem = {

@@ -1,0 +1,11 @@
+.container {
+  padding-left: 16px;
+}
+
+/* 参考：もし左右のパディングが必要な場合は以下のようにします */
+/*
+.containerWithHorizontalPadding {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+*/
