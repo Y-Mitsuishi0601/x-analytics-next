@@ -13,10 +13,8 @@ export default function AuthenticatedLayout({ children }: { children: React.Reac
     <>
       <SidebarProvider>
         <AppSidebar />
-        <main>
-          <SidebarTrigger />
-          {children}
-        </main>
+        <SidebarTrigger />
+        {children}
       </SidebarProvider>
     </>
   );
