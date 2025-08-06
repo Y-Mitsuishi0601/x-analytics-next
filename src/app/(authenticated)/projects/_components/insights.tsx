@@ -5,8 +5,7 @@ import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { Button } from "@/components/ui/button";
 import { nextAction, projectSummary, topKeywords, topAccounts, topHashtags } from "@/mock/mockData";
-import { SummaryItem } from "./summary-item";
-import styles from "./insights.module.css";
+import { SummaryItem } from "../../../../components/ui/insights/summary-item";
 import { useRef } from "react";
 
 export function Insights() {
@@ -19,8 +18,8 @@ export function Insights() {
     };
 
     return (
-        <div className={styles.container}>
-            <div className="space-y-6 p-6">
+        <div className="p-6">
+            <div className="space-y-6">
                 {/* Import CSV Button */}
                 <div className="flex justify-end mb-4">
                     <Button
@@ -64,8 +63,8 @@ export function Insights() {
                 {/* Project Summary Section */}
                 <Card>
                     <CardHeader>
-                        <CardTitle>Project Summary</CardTitle>
-                        <CardDescription>Overview of your project workflow and data</CardDescription>
+                        <CardTitle className="text-lg font-bold">Project Summary</CardTitle>
+                        <CardDescription className="text-sm text-muted-foreground">Overview of your project workflow and data</CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-4">
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -84,8 +83,8 @@ export function Insights() {
                 {/* Keywords and Hashtags Section */}
                 <Card>
                     <CardHeader>
-                        <CardTitle>Keywords and Hashtags</CardTitle>
-                        <CardDescription>Most popular words, accounts and hashtags in this project</CardDescription>
+                        <CardTitle className="text-lg font-bold">Keywords and Hashtags</CardTitle>
+                        <CardDescription className="text-sm text-muted-foreground">Most popular words, accounts and hashtags in this project</CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-6">
                         <div>

@@ -5,7 +5,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
-import styles from "./storage.module.css";
 import { mockImages, mockVoices } from "@/mock/mockData";
 
 function ImageCard({ image }: { image: typeof mockImages[0] }) {
@@ -79,45 +78,60 @@ function VoiceCard({ voice }: { voice: typeof mockVoices[0] }) {
 
 export function Storage() {
     return (
-        <div className={styles.container}>
-            <Tabs defaultValue="images" className="w-full">
-                <TabsList className="grid w-full grid-cols-2">
-                    <TabsTrigger value="images">Images</TabsTrigger>
-                    <TabsTrigger value="voices">Voices</TabsTrigger>
-                </TabsList>
-                
-                <TabsContent value="images" className="space-y-4">
-                    <div className="flex items-center justify-between">
-                        <div>
-                            <h2 className="text-2xl font-bold">Images</h2>
-                            <p className="text-muted-foreground">PNG and JPEG files stored in your project</p>
+        <div className="p-6">
+            <div className="space-y-6">
+                <Card className="mb-4">
+                    <CardHeader>
+                        <CardTitle className="text-lg font-bold">Storage Overview</CardTitle>
+                        <CardDescription className="text-sm text-muted-foreground">Details about your storage usage</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="text-sm">Total Storage</div>
+                            <div className="text-sm">Used Storage</div>
                         </div>
-                        <Badge variant="secondary">{mockImages.length} images</Badge>
-                    </div>
-                    
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {mockImages.map((image) => (
-                            <ImageCard key={image.id} image={image} />
-                        ))}
-                    </div>
-                </TabsContent>
+                    </CardContent>
+                </Card>
                 
-                <TabsContent value="voices" className="space-y-4">
-                    <div className="flex items-center justify-between">
-                        <div>
-                            <h2 className="text-2xl font-bold">Voices</h2>
-                            <p className="text-muted-foreground">MP3 and M4A audio files with summaries</p>
-                        </div>
-                        <Badge variant="secondary">{mockVoices.length} voices</Badge>
-                    </div>
+                <Tabs defaultValue="images" className="w-full">
+                    <TabsList className="grid w-full grid-cols-2">
+                        <TabsTrigger value="images">Images</TabsTrigger>
+                        <TabsTrigger value="voices">Voices</TabsTrigger>
+                    </TabsList>
                     
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {mockVoices.map((voice) => (
-                            <VoiceCard key={voice.id} voice={voice} />
-                        ))}
-                    </div>
-                </TabsContent>
-            </Tabs>
+                    <TabsContent value="images" className="space-y-4">
+                        <div className="flex items-center justify-between">
+                            <div>
+                                <h2 className="text-2xl font-bold">Images</h2>
+                                <p className="text-muted-foreground">PNG and JPEG files stored in your project</p>
+                            </div>
+                            <Badge variant="secondary">{mockImages.length} images</Badge>
+                        </div>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            {mockImages.map((image) => (
+                                <ImageCard key={image.id} image={image} />
+                            ))}
+                        </div>
+                    </TabsContent>
+                    
+                    <TabsContent value="voices" className="space-y-4">
+                        <div className="flex items-center justify-between">
+                            <div>
+                                <h2 className="text-2xl font-bold">Voices</h2>
+                                <p className="text-muted-foreground">MP3 and M4A audio files with summaries</p>
+                            </div>
+                            <Badge variant="secondary">{mockVoices.length} voices</Badge>
+                        </div>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {mockVoices.map((voice) => (
+                                <VoiceCard key={voice.id} voice={voice} />
+                            ))}
+                        </div>
+                    </TabsContent>
+                </Tabs>
+            </div>
         </div>
     );
 }

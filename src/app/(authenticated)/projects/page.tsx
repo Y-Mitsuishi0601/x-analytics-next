@@ -7,7 +7,7 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs"
 import { Insights } from "./_components/insights"
-import { AccountsAndPosts } from "./_components/accounts-and-posts"
+import { Accounts } from "./_components/accounts"
 import { Storage } from "./_components/storage"
 import styles from "./page.module.css"
 
@@ -23,7 +23,7 @@ export default function ProjectPage() {
           <Insights />
         </TabsContent>
         <TabsContent value="posts-and-accounts">
-          <AccountsAndPosts />
+          <Accounts />
         </TabsContent>
         <TabsContent value="storage">
           <Storage />
