@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
-import { AppSidebar } from "@/components/authenticated/app-sidebar";
+import { AppSidebar } from "@/app/(authenticated)/_components/app-sidebar";
 
 
 export const metadata: Metadata = {
