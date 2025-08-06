@@ -3,19 +3,53 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
+import { Button } from "@/components/ui/button";
 import { nextAction, projectSummary, topKeywords, topAccounts, topHashtags } from "@/mock/mockData";
 import { SummaryItem } from "./summary-item";
 import styles from "./insights.module.css";
+import { useRef } from "react";
 
 export function Insights() {
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
+    const handleImportCSV = () => {
+        if (fileInputRef.current) {
+            fileInputRef.current.click();
+        }
+    };
+
     return (
         <div className={styles.container}>
             <div className="space-y-6 p-6">
+                {/* Import CSV Button */}
+                <div className="flex justify-end mb-4">
+                    <Button
+                        variant="default"
+                        onClick={handleImportCSV}
+                        className="transition-transform transform hover:scale-105"
+                    >
+                        + Import CSV
+                    </Button>
+                    <input
+                        type="file"
+                        ref={fileInputRef}
+                        accept=".csv"
+                        style={{ display: "none" }}
+                        onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (file) {
+                                console.log("Uploaded file:", file);
+                                // Add further processing logic here
+                            }
+                        }}
+                    />
+                </div>
+
                 {/* Next Action Section */}
                 <Card className="border-2 border-primary bg-primary/5">
                     <CardHeader>
                         <div className="flex items-center justify-between">
-                            <CardTitle className="text-xl">Next Action</CardTitle>
+                            <CardTitle className="text-2xl font-bold text-primary">Next Action</CardTitle>
                             <Badge variant={nextAction.priority === "High" ? "destructive" : "secondary"}>
                                 {nextAction.priority} Priority
                             </Badge>
