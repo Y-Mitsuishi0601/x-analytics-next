@@ -1,9 +1,6 @@
 "use client"
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Badge } from "@/components/ui/badge";
-import { mockPosts } from "@/mock/mockData";
-import { PostCard } from "@/components/ui/x-ui/post-card";
 import { AccountsTabContent } from "@/components/ui/x-ui/accounts-tab-content";
 import { PostsTabContent } from "@/components/ui/x-ui/posts-tab-content";
 
