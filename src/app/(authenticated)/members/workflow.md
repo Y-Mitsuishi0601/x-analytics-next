@@ -2,6 +2,8 @@
 
 This page is for organization managers to conduct member management.
 
+This workflow allows managers to efficiently manage the organization's members.
+
 ## 1\. Member List Display
 
   - Displays a list of affiliated members.
@@ -29,6 +31,3 @@ This page is for organization managers to conduct member management.
   - Check the recent action history for each member.
   - Utilized for security and operational management.
 
------
-
-This workflow allows managers to efficiently manage the organization's members.
