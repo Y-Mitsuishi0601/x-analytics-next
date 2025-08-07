@@ -1,7 +1,7 @@
 "use client"
 
 import { Card, CardContent } from "@/components/ui/card";
-import { AvatarDisplay } from "@/components/ui/x-ui/avatar-display";
+import { AvatarDisplay } from "@/features/accounts/components/avatar-display";
 import { mockPosts } from "@/mock/mockData";
 
 interface PostCardProps {

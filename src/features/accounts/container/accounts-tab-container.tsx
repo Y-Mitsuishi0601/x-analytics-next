@@ -1,10 +1,10 @@
 "use client"
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { AccountsTabContent } from "@/components/ui/x-ui/accounts-tab-content";
-import { PostsTabContent } from "@/components/ui/x-ui/posts-tab-content";
+import { AccountsTabContent } from "@/features/accounts/components/accounts-tab-content";
+import { PostsTabContent } from "@/features/accounts/components/posts-tab-content";
 
-export function Accounts() {
+export function AccountsTabContainer() {
     return (
         <div className="p-6">
             <Tabs defaultValue="accounts" className="w-full">

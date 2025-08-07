@@ -2,7 +2,7 @@
 
 import { Badge } from "@/components/ui/badge";
 import { mockPosts } from "@/mock/mockData";
-import { PostCard } from "@/components/ui/x-ui/post-card";
+import { PostCard } from "@/features/accounts/components/post-card";
 
 export function PostsTabContent() {
     return (

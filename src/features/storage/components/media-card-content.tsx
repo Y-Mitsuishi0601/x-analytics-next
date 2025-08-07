@@ -1,7 +1,7 @@
 "use client";
 
 import { Badge } from "@/components/ui/badge";
-import { MediaCard, MediaCardProps } from "@/components/ui/storage/media-card";
+import { MediaCard, MediaCardProps } from "@/features/storage/components/media-card";
 
 interface MediaCardContentProps {
     title: string;

@@ -2,7 +2,7 @@
 
 import { Badge } from "@/components/ui/badge";
 import { mockAccounts } from "@/mock/mockData";
-import { AccountCard } from "@/components/ui/x-ui/account-card";
+import { AccountCard } from "@/features/accounts/components/account-card";
 
 export function AccountsTabContent() {
     return (

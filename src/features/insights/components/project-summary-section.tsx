@@ -3,7 +3,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { projectSummary } from "@/mock/mockData";
-import { SummaryItem } from "@/components/ui/insights/summary-item";
+import { SummaryItem } from "@/features/insights/components/summary-item";
 
 export function ProjectSummarySection() {
     return (

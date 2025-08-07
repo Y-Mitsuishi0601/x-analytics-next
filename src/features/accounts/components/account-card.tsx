@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { AvatarDisplay } from "@/components/ui/x-ui/avatar-display";
+import { AvatarDisplay } from "@/features/accounts/components/avatar-display";
 import { mockAccounts } from "@/mock/mockData";
 
 interface AccountLayerProps {
