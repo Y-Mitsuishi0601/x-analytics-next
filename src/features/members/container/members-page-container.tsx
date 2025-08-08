@@ -1,9 +1,9 @@
 import React from "react";
-import { MemberList } from "@/features/members/component/member-list";
-import { InvitationForm } from "@/features/members/component/invitation-form";
-import { MemberPermission } from "@/features/members/component/member-permission";
-import { MemberEdit } from "@/features/members/component/member-edit";
-import { MemberActivityLog } from "@/features/members/component/member-activity-log";
+import { MemberList } from "@/features/members/components/member-list";
+import { InvitationForm } from "@/features/members/components/invitation-form";
+import { MemberPermission } from "@/features/members/components/member-permission";
+import { MemberEdit } from "@/features/members/components/member-edit";
+import { MemberActivityLog } from "@/features/members/components/member-activity-log";
 
 // 仮データ
 const members = [
