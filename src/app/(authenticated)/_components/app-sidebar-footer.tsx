@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { User, ChevronUp } from "lucide-react";
 import {
   SidebarFooter,
@@ -13,8 +14,21 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Logout } from "@/lib/logout";
 
 export function AppSidebarFooter() {
+
+  const router = useRouter();
+
+  const onSubmit = async () => {
+    try {
+      await Logout();
+      router.push("/login");
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
+
   return (
     <SidebarFooter>
       <DropdownMenu>
@@ -34,7 +48,7 @@ export function AppSidebarFooter() {
           <DropdownMenuItem>
             <span>Billing</span>
           </DropdownMenuItem>
-          <DropdownMenuItem>
+          <DropdownMenuItem onClick={onSubmit}>
             <span>Sign out</span>
           </DropdownMenuItem>
         </DropdownMenuContent>

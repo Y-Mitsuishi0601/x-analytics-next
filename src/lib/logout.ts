@@ -1,7 +1,3 @@
-import { useRouter } from "next/router";
-
-const router = useRouter();
-
 const Logout = async () => {
     console.log("Logout function called");
     const access_token = localStorage.getItem("access_token");
@@ -23,9 +19,7 @@ const Logout = async () => {
       
     } catch (error) {
       console.error("Error:", error);
-    } finally {
-    router.push("/login");
-  }
+    }
 };
 
 export { Logout };
