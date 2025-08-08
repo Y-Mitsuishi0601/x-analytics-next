@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -12,10 +12,10 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 
-import { Login, loginSchema, LoginFormValues } from "@/lib/login";
+import { Login, loginSchema, LoginFormValues } from '@/lib/login';
 
 export function LoginForm() {
   const router = useRouter();
@@ -23,17 +23,17 @@ export function LoginForm() {
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
   });
 
   const onSubmit = async (values: LoginFormValues) => {
     try {
       await Login(values); // ログイン処理を呼び出し
-      router.push("/projects"); // 成功時にリダイレクト
+      router.push('/projects'); // 成功時にリダイレクト
     } catch (error) {
-      console.error("Login failed:", error);
+      console.error('Login failed:', error);
     }
   };
 
@@ -47,7 +47,11 @@ export function LoginForm() {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input type="email" placeholder="example@example.com" {...field} />
+                <Input
+                  type="email"
+                  placeholder="example@example.com"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>

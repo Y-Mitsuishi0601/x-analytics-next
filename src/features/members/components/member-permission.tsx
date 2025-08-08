@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 import {
   Select,
   SelectTrigger,
   SelectValue,
   SelectContent,
   SelectItem,
-} from "@/components/ui/select";
+} from '@/components/ui/select';
 
 export function MemberPermission({ member }: { member: any }) {
   return (

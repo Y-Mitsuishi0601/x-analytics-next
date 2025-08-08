@@ -1,31 +1,30 @@
-"use client";
+'use client';
 
-import { useRouter } from "next/navigation";
-import { User, ChevronUp } from "lucide-react";
+import { useRouter } from 'next/navigation';
+import { User, ChevronUp } from 'lucide-react';
 import {
   SidebarFooter,
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
-} from "@/components/ui/sidebar";
+} from '@/components/ui/sidebar';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Logout } from "@/lib/logout";
+} from '@/components/ui/dropdown-menu';
+import { Logout } from '@/lib/logout';
 
 export function AppSidebarFooter() {
-
   const router = useRouter();
 
   const onSubmit = async () => {
     try {
       await Logout();
-      router.push("/login");
+      router.push('/login');
     } catch (error) {
-      console.error("Logout failed:", error);
+      console.error('Logout failed:', error);
     }
   };
 

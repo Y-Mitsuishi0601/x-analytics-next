@@ -1,16 +1,16 @@
-import React from "react";
-import { MemberList } from "@/features/members/components/member-list";
-import { InvitationForm } from "@/features/members/components/invitation-form";
-import { MemberPermission } from "@/features/members/components/member-permission";
-import { MemberEdit } from "@/features/members/components/member-edit";
-import { MemberActivityLog } from "@/features/members/components/member-activity-log";
+import React from 'react';
+import { MemberList } from '@/features/members/components/member-list';
+import { InvitationForm } from '@/features/members/components/invitation-form';
+import { MemberPermission } from '@/features/members/components/member-permission';
+import { MemberEdit } from '@/features/members/components/member-edit';
+import { MemberActivityLog } from '@/features/members/components/member-activity-log';
 
 // 仮データ
 const members = [
-  { id: 1, name: "Alice", role: "Admin", status: "Active" },
-  { id: 2, name: "Bob", role: "Member", status: "Invited" },
+  { id: 1, name: 'Alice', role: 'Admin', status: 'Active' },
+  { id: 2, name: 'Bob', role: 'Member', status: 'Invited' },
 ];
-const logs = ["Alice updated profile", "Bob invited"];
+const logs = ['Alice updated profile', 'Bob invited'];
 
 export const MembersPageContainer = () => (
   <div className="space-y-8 p-6">

@@ -1,5 +1,5 @@
-import React from "react";
-import { Card, CardContent } from "@/components/ui/card";
+import React from 'react';
+import { Card, CardContent } from '@/components/ui/card';
 
 export function MemberList({ members }: { members: any[] }) {
   return (

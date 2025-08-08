@@ -1,15 +1,10 @@
-"use client";
+'use client';
 
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs";
-import { InsightsTabContainer } from "@/features/insights/container/insights-tab-container";
-import { AccountsTabContainer } from "@/features/accounts/container/accounts-tab-container";
-import { StorageTabContainer } from "@/features/storage/container/storage-tab-container";
-import styles from "@/app/(authenticated)/projects/page.module.css";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { InsightsTabContainer } from '@/features/insights/container/insights-tab-container';
+import { AccountsTabContainer } from '@/features/accounts/container/accounts-tab-container';
+import { StorageTabContainer } from '@/features/storage/container/storage-tab-container';
+import styles from '@/app/(authenticated)/projects/page.module.css';
 
 export function ProjectPageContainer() {
   return (
