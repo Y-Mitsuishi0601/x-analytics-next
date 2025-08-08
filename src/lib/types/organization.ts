@@ -12,6 +12,19 @@ export interface UserOrganizationsResponse {
   total_count: number;
 }
 
+export interface CreateOrganizationRequest {
+  name: string;
+  slug: string;
+}
+
+export interface CreateOrganizationResponse {
+  id: string;
+  name: string;
+  slug: string;
+  my_role: string;
+  member_count: number;
+}
+
 export interface HTTPValidationError {
   detail: Array<{
     loc: Array<string | number>;
