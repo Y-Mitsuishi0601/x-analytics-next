@@ -1,3 +1,4 @@
+"use client"
 import type { Metadata } from "next";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/app/(authenticated)/_components/app-sidebar";
@@ -9,10 +10,10 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 
 
-export const metadata: Metadata = {
-  title: "X-Analytics-Agent",
-  description: "",
-};
+// export const metadata: Metadata = {
+//   title: "X-Analytics-Agent",
+//   description: "",
+// };
 
 export default function AuthenticatedLayout({ children }: { children: React.ReactNode }) {
   return (
