@@ -1,30 +1,39 @@
 'use client';
-import type { Metadata } from 'next';
+import { useState } from 'react';
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import { AppSidebar } from '@/app/(authenticated)/_components/app-sidebar';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-
-// export const metadata: Metadata = {
-//   title: "X-Analytics-Agent",
-//   description: "",
-// };
+import { ProtectedRoute } from '@/components/protected-route';
 
 export default function AuthenticatedLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  // Create QueryClient once and reuse it
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            staleTime: 5 * 60 * 1000, // 5 minutes
+            retry: 2,
+          },
+        },
+      })
+  );
+
   return (
-    <>
-      <QueryClientProvider client={new QueryClient()}>
+    <QueryClientProvider client={queryClient}>
+      <ProtectedRoute>
         <SidebarProvider>
           <AppSidebar />
           <SidebarTrigger />
           {children}
         </SidebarProvider>
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
-    </>
+      </ProtectedRoute>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 }

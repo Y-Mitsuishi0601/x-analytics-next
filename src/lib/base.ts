@@ -1,3 +1,10 @@
+/**
+ * @deprecated Use authenticatedFetch from @/lib/auth-fetch instead
+ * This is kept for backward compatibility during migration
+ */
+
+import { authenticatedFetch } from './auth-fetch';
+
 interface FetchWithAuthParams {
   url: string;
   options?: RequestInit;
@@ -7,26 +14,6 @@ export const fetchWithAuth = ({
   url,
   options = {},
 }: FetchWithAuthParams): Promise<Response> => {
-  const access_token = localStorage.getItem('access_token');
-
-  const defaultHeaders = {
-    'Content-Type': 'application/json',
-  };
-
-  if (access_token) {
-    options.headers = {
-      ...defaultHeaders,
-      ...(options.headers || {}),
-      Authorization: `Bearer ${access_token}`,
-    };
-  } else {
-    options.headers = {
-      ...defaultHeaders,
-      ...(options.headers || {}),
-    };
-  }
-
-  options.credentials = 'include';
-
-  return fetch(url, options);
+  // Delegate to new authenticated fetch utility
+  return authenticatedFetch(url, options);
 };

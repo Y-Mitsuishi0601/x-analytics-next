@@ -1,14 +1,13 @@
 import { z } from 'zod';
 
-const loginSchema = z.object({
+export const loginSchema = z.object({
   email: z.string().email('Invalid email address'),
   password: z.string().min(6, 'Password must be at least 6 characters'),
 });
 
-type LoginFormValues = z.infer<typeof loginSchema>;
+export type LoginFormValues = z.infer<typeof loginSchema>;
 
 const Login = async (values: LoginFormValues) => {
-  console.log('Login function called with values:', values);
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
@@ -17,25 +16,28 @@ const Login = async (values: LoginFormValues) => {
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include', // Include cookies
         body: JSON.stringify(values),
       }
     );
 
     if (!response.ok) {
-      throw new Error('Login failed');
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.detail || 'Login failed');
     }
 
     const data = await response.json();
-    console.log('Login successful:', data);
 
-    // Save access token to local storage
-    if (data.access_token) {
-      localStorage.setItem('access_token', data.access_token);
+    // Store CSRF token (no longer storing access tokens in localStorage)
+    if (data.csrf_token && typeof window !== 'undefined') {
+      localStorage.setItem('csrf_token', data.csrf_token);
     }
+
+    return data.user;
   } catch (error) {
-    console.error('Error:', error);
+    console.error('Login error:', error);
+    throw error;
   }
 };
 
-export { Login, loginSchema };
-export type { LoginFormValues };
+export { Login };

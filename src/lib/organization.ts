@@ -3,18 +3,13 @@ import {
   CreateOrganizationRequest,
   CreateOrganizationResponse,
 } from './types/organization';
-import { fetchWithAuth } from './base';
+import { authenticatedFetch } from './auth-fetch';
+import { config } from './config';
 
 export const fetchUserOrganizations =
   async (): Promise<UserOrganizationsResponse> => {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-    const fullUrl = `${apiUrl}/organizations`;
-
-    const response = await fetchWithAuth({
-      url: fullUrl,
-      options: {
-        method: 'GET',
-      },
+    const response = await authenticatedFetch('/organizations', {
+      method: 'GET',
     });
 
     if (!response.ok) {
@@ -28,15 +23,9 @@ export const fetchUserOrganizations =
 export const createOrganization = async (
   request: CreateOrganizationRequest
 ): Promise<CreateOrganizationResponse> => {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-  const fullUrl = `${apiUrl}/organizations`;
-
-  const response = await fetchWithAuth({
-    url: fullUrl,
-    options: {
-      method: 'POST',
-      body: JSON.stringify(request),
-    },
+  const response = await authenticatedFetch('/organizations', {
+    method: 'POST',
+    body: JSON.stringify(request),
   });
 
   if (!response.ok) {
@@ -53,15 +42,12 @@ export const createOrganization = async (
 export const switchOrganization = async (
   organizationId: string
 ): Promise<void> => {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-  const fullUrl = `${apiUrl}/organizations/${organizationId}/switch`;
-
-  const response = await fetchWithAuth({
-    url: fullUrl,
-    options: {
+  const response = await authenticatedFetch(
+    `/organizations/${organizationId}/switch`,
+    {
       method: 'POST',
-    },
-  });
+    }
+  );
 
   if (!response.ok) {
     const errorData = await response.text();

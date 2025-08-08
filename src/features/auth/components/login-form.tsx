@@ -15,10 +15,12 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 
-import { Login, loginSchema, LoginFormValues } from '@/lib/login';
+import { loginSchema, LoginFormValues } from '@/lib/login';
+import { useAuth } from '@/contexts/auth-context';
 
 export function LoginForm() {
   const router = useRouter();
+  const { login } = useAuth();
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -30,10 +32,11 @@ export function LoginForm() {
 
   const onSubmit = async (values: LoginFormValues) => {
     try {
-      await Login(values); // ログイン処理を呼び出し
+      await login(values.email, values.password);
       router.push('/projects'); // 成功時にリダイレクト
     } catch (error) {
       console.error('Login failed:', error);
+      // TODO: Show error message to user
     }
   };
 

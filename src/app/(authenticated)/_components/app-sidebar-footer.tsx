@@ -14,14 +14,15 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Logout } from '@/lib/logout';
+import { useAuth } from '@/contexts/auth-context';
 
 export function AppSidebarFooter() {
   const router = useRouter();
+  const { logout, user } = useAuth();
 
   const onSubmit = async () => {
     try {
-      await Logout();
+      await logout();
       router.push('/login');
     } catch (error) {
       console.error('Logout failed:', error);
@@ -33,7 +34,7 @@ export function AppSidebarFooter() {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <SidebarMenuButton>
-            <User /> Username
+            <User /> {user?.username || user?.email || 'User'}
             <ChevronUp className="ml-auto" />
           </SidebarMenuButton>
         </DropdownMenuTrigger>
