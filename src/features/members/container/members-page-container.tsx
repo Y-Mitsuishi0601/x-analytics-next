@@ -1,9 +1,7 @@
 import React from 'react';
-import { MemberList } from '@/features/members/components/member-list';
 import { InvitationForm } from '@/features/members/components/invitation-form';
-import { MemberPermission } from '@/features/members/components/member-permission';
-import { MemberEdit } from '@/features/members/components/member-edit';
 import { MemberActivityLog } from '@/features/members/components/member-activity-log';
+import { MemberTable } from '../components/member-table';
 
 // 仮データ
 const members = [
@@ -13,26 +11,14 @@ const members = [
 const logs = ['Alice updated profile', 'Bob invited'];
 
 export const MembersPageContainer = () => (
-  <div className="space-y-8 p-6">
+  <div className="w-full overflow-x-auto space-y-8 p-6">
     <section>
       <h2 className="font-bold text-lg mb-2">Member List</h2>
-      <MemberList members={members} />
+      <MemberTable members={members} onEdit={(id) => console.log('Edit', id)} onDelete={(id) => console.log('Delete', id)} />
     </section>
     <section>
       <h2 className="font-bold text-lg mb-2">Invite Member</h2>
       <InvitationForm />
-    </section>
-    <section>
-      <h2 className="font-bold text-lg mb-2">Permission Management</h2>
-      {members.map((m) => (
-        <MemberPermission key={m.id} member={m} />
-      ))}
-    </section>
-    <section>
-      <h2 className="font-bold text-lg mb-2">Edit/Delete Member</h2>
-      {members.map((m) => (
-        <MemberEdit key={m.id} member={m} />
-      ))}
     </section>
     <section>
       <h2 className="font-bold text-lg mb-2">Activity Log</h2>
