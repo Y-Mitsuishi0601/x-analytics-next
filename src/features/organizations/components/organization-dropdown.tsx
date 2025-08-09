@@ -11,13 +11,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import {
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  useSidebar,
-} from '@/components/ui/sidebar';
+import { Button } from '@/components/ui/button';
 import { Organization } from '@/lib/types/organization';
+import { useIsMobile } from '@/hooks/use-mobile';
 import { useOrganizations } from '../hooks/use-organizations';
 import { useSwitchOrganization } from '../hooks/use-switch-organization';
 import { OrganizationAvatar } from './organization-avatar';
@@ -25,7 +21,7 @@ import { OrganizationListItem } from './organization-list-item';
 import { CreateOrganizationDialog } from './create-organization-dialog';
 
 export function OrganizationDropdown() {
-  const { isMobile } = useSidebar();
+  const isMobile = useIsMobile();
   const [isCreateDialogOpen, setIsCreateDialogOpen] = React.useState(false);
 
   const { organizations, currentOrganizationId, isLoading, isError } =
@@ -58,26 +54,36 @@ export function OrganizationDropdown() {
   // Loading state
   if (isLoading) {
     return (
-      <SidebarMenuButton size="lg" disabled>
+      <Button
+        variant="ghost"
+        size="lg"
+        disabled
+        className="w-full justify-start h-auto p-3"
+      >
         <OrganizationAvatar name="Loading" size="md" />
-        <div className="grid flex-1 text-left text-sm leading-tight">
+        <div className="grid flex-1 text-left text-sm leading-tight ml-3">
           <span className="truncate font-medium">Loading...</span>
         </div>
-      </SidebarMenuButton>
+      </Button>
     );
   }
 
   // Error state
   if (isError) {
     return (
-      <SidebarMenuButton size="lg" disabled>
-        <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
+      <Button
+        variant="ghost"
+        size="lg"
+        disabled
+        className="w-full justify-start h-auto p-3"
+      >
+        <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-red-100">
           ⚠️
         </div>
-        <div className="grid flex-1 text-left text-sm leading-tight">
+        <div className="grid flex-1 text-left text-sm leading-tight ml-3">
           <span className="truncate font-medium">Error loading orgs</span>
         </div>
-      </SidebarMenuButton>
+      </Button>
     );
   }
 
@@ -88,14 +94,18 @@ export function OrganizationDropdown() {
         isOpen={isCreateDialogOpen}
         onOpenChange={setIsCreateDialogOpen}
       >
-        <SidebarMenuButton size="lg">
-          <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
+        <Button
+          variant="ghost"
+          size="lg"
+          className="w-full justify-start h-auto p-3"
+        >
+          <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-blue-100">
             <Plus className="size-4" />
           </div>
-          <div className="grid flex-1 text-left text-sm leading-tight">
+          <div className="grid flex-1 text-left text-sm leading-tight ml-3">
             <span className="truncate font-medium">Create organization</span>
           </div>
-        </SidebarMenuButton>
+        </Button>
       </CreateOrganizationDialog>
     );
   }
@@ -106,20 +116,21 @@ export function OrganizationDropdown() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <SidebarMenuButton
+      <DropdownMenuTrigger asChild className="p-2">
+        <Button
+          variant="ghost"
           size="lg"
-          className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+          className="w-full justify-start h-auto py-2 data-[state=open]:bg-accent"
         >
           <OrganizationAvatar name={activeTeam.name} size="md" />
-          <div className="grid flex-1 text-left text-sm leading-tight">
+          <div className="grid flex-1 text-left text-sm leading-tight ml-3">
             <span className="truncate font-medium">{activeTeam.name}</span>
             <span className="truncate text-xs text-muted-foreground">
               {activeTeam.my_role}
             </span>
           </div>
-          <ChevronsUpDown className="ml-auto" />
-        </SidebarMenuButton>
+          <ChevronsUpDown className="ml-auto w-4 h-4" />
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
         className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"

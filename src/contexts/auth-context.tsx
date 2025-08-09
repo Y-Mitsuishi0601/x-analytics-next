@@ -93,7 +93,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         throw new Error(errorData.detail || 'Login failed');
       }
 
-      const data = await response.json();
+      const parsed_response = await response.json();
+      const data = parsed_response.data;
 
       // Store CSRF token
       if (data.csrf_token) {

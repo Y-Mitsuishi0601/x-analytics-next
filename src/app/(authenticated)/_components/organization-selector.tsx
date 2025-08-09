@@ -1,6 +1,3 @@
-'use client';
-
-import { SidebarMenu, SidebarMenuItem } from '@/components/ui/sidebar';
 import { OrganizationDropdown } from '@/features/organizations';
 
 /**
@@ -10,10 +7,8 @@ import { OrganizationDropdown } from '@/features/organizations';
  */
 export function OrganizationSelector() {
   return (
-    <SidebarMenu>
-      <SidebarMenuItem>
-        <OrganizationDropdown />
-      </SidebarMenuItem>
-    </SidebarMenu>
+    <div>
+      <OrganizationDropdown />
+    </div>
   );
 }

@@ -2,12 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { User, ChevronUp } from 'lucide-react';
-import {
-  SidebarFooter,
-  SidebarMenu,
-  SidebarMenuItem,
-  SidebarMenuButton,
-} from '@/components/ui/sidebar';
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -30,13 +25,16 @@ export function AppSidebarFooter() {
   };
 
   return (
-    <SidebarFooter>
+    <div>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <SidebarMenuButton>
-            <User /> {user?.username || user?.email || 'User'}
-            <ChevronUp className="ml-auto" />
-          </SidebarMenuButton>
+          <Button variant="ghost" className="w-full justify-start h-auto p-3">
+            <User className="w-4 h-4" />
+            <span className="ml-3">
+              {user?.username || user?.email || 'User'}
+            </span>
+            <ChevronUp className="ml-auto w-4 h-4" />
+          </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent
           side="top"
@@ -53,6 +51,6 @@ export function AppSidebarFooter() {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-    </SidebarFooter>
+    </div>
   );
 }

@@ -4,7 +4,7 @@ import {
   CreateOrganizationResponse,
 } from './types/organization';
 import { authenticatedFetch } from './auth-fetch';
-import { config } from './config';
+import { getCookie } from './utils';
 
 export const fetchUserOrganizations =
   async (): Promise<UserOrganizationsResponse> => {
@@ -16,8 +16,17 @@ export const fetchUserOrganizations =
       throw new Error(`Failed to fetch organizations: ${response.statusText}`);
     }
 
-    const data: UserOrganizationsResponse = await response.json();
-    return data;
+    const parsed_response = await response.json();
+    const organizations = parsed_response.items;
+
+    // Get current organization ID from cookies instead of API response
+    const current_organization_id = getCookie('current_org_id');
+
+    return {
+      organizations: organizations,
+      current_organization_id: current_organization_id,
+      total_count: organizations.length,
+    };
   };
 
 export const createOrganization = async (
@@ -35,7 +44,8 @@ export const createOrganization = async (
     );
   }
 
-  const data: CreateOrganizationResponse = await response.json();
+  const parsed_response = await response.json();
+  const data = parsed_response.data;
   return data;
 };
 

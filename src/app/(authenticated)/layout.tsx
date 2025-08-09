@@ -1,9 +1,5 @@
-'use client';
-import { useState } from 'react';
-import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import { AppSidebar } from '@/app/(authenticated)/_components/app-sidebar';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { QueryClientProvider } from '@/components/providers';
 import { ProtectedRoute } from '@/components/protected-route';
 
 export default function AuthenticatedLayout({
@@ -11,29 +7,27 @@ export default function AuthenticatedLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // Create QueryClient once and reuse it
-  const [queryClient] = useState(
-    () =>
-      new QueryClient({
-        defaultOptions: {
-          queries: {
-            staleTime: 5 * 60 * 1000, // 5 minutes
-            retry: 2,
-          },
-        },
-      })
-  );
-
   return (
-    <QueryClientProvider client={queryClient}>
+    <QueryClientProvider>
       <ProtectedRoute>
-        <SidebarProvider>
-          <AppSidebar />
-          <SidebarTrigger />
-          {children}
-        </SidebarProvider>
+        <div className="flex h-screen bg-gray-50">
+          {/* Fixed sidebar */}
+          <div className="w-64 bg-white shadow-sm border-r">
+            <AppSidebar />
+          </div>
+
+          {/* Main content */}
+          <div className="flex-1 flex flex-col overflow-hidden">
+            {/* Optional header */}
+            <header className="bg-white shadow-sm border-b px-6 py-4">
+              <h1 className="text-lg font-semibold">Dashboard</h1>
+            </header>
+
+            {/* Page content */}
+            <main className="flex-1 overflow-auto p-6">{children}</main>
+          </div>
+        </div>
       </ProtectedRoute>
-      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 }

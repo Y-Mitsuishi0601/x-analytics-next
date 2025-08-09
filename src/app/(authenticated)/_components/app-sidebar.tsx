@@ -1,19 +1,24 @@
-'use client';
-
-import { Sidebar, SidebarHeader } from '@/components/ui/sidebar';
-
 import { OrganizationSelector } from './organization-selector';
-import { AppSidebarFooter } from './app-sidebar-footer';
 import { AppSidebarContent } from './app-sidebar-content';
+import { AppSidebarFooter } from './app-sidebar-footer';
 
 export function AppSidebar() {
   return (
-    <Sidebar>
-      <SidebarHeader>
+    <div className="h-full flex flex-col">
+      {/* Header with org selector */}
+      <div className="p-4 border-b">
         <OrganizationSelector />
-      </SidebarHeader>
-      <AppSidebarContent />
-      <AppSidebarFooter />
-    </Sidebar>
+      </div>
+
+      {/* Navigation content */}
+      <div className="flex-1 p-4">
+        <AppSidebarContent />
+      </div>
+
+      {/* Footer */}
+      <div className="p-4 border-t">
+        <AppSidebarFooter />
+      </div>
+    </div>
   );
 }
