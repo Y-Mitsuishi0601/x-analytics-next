@@ -3,6 +3,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Button } from '@/components/ui/button';
 import { Edit, Trash } from 'lucide-react';
 import { MemberEditModal } from './member-edit-modal';
+import { DeleteConfirmationModal } from './delete-confirmation-modal';
 
 export function MemberTable({ members, onEdit, onDelete }: { 
   members: any[]; 
@@ -12,6 +13,8 @@ export function MemberTable({ members, onEdit, onDelete }: {
   const [isEditModalOpen, setEditModalOpen] = React.useState(false);
   const [selectedMember, setSelectedMember] = React.useState(null);
   const [memberList, setMembers] = React.useState(members);
+  const [isDeleteModalOpen, setDeleteModalOpen] = React.useState(false);
+  const [memberToDelete, setMemberToDelete] = React.useState<{ id: string } | null>(null);
 
   return (
     <div className="w-full overflow-x-auto">
@@ -40,7 +43,13 @@ export function MemberTable({ members, onEdit, onDelete }: {
                 >
                   <Edit className="h-4 w-4" />
                 </Button>
-                <Button onClick={() => onDelete(member.id)} variant="ghost">
+                <Button
+                  onClick={() => {
+                    setMemberToDelete(member);
+                    setDeleteModalOpen(true);
+                  }}
+                  variant="ghost"
+                >
                   <Trash className="h-4 w-4" />
                 </Button>
               </TableCell>
@@ -63,6 +72,16 @@ export function MemberTable({ members, onEdit, onDelete }: {
           members={members}
         />
       )}
+      <DeleteConfirmationModal
+        isOpen={isDeleteModalOpen}
+        onClose={() => setDeleteModalOpen(false)}
+        onConfirm={() => {
+          if (memberToDelete) {
+            onDelete(memberToDelete.id);
+            setDeleteModalOpen(false);
+          }
+        }}
+      />
     </div>
   );
 }
